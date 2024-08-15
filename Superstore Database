@@ -35,13 +35,13 @@ FROM superstore
 ORDER BY price desc;
 
 #Show a statistic about the item prices.
-select avg(price), item_name
-from superstore
+select item_name, min(price)
+from superstore 
 group by item_name
-order by avg(price) desc;
+order by min(price) asc;
 
 #Show a statistic about the price for items in the category of "Kitchen Supplies". 
-select sum(price), item_name
+select item_name, sum(price)
 from superstore
 where category = "Kitchen Supplies"
 group by item_name;
