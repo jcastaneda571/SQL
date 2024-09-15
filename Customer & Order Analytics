@@ -4,15 +4,15 @@
 #1. How many orders were placed in January?
 Select distinct count(orderID) 
 from BIT_DB.JanSales
-where length(orderID)=6
+where length(orderID) = 6
 and orderID<> 'Order ID';
 
 
 #2. How many of those orders were for an iPhone? 
 Select distinct count(orderID) 
 from BIT_DB.JanSales
-where product='iPhone' 
-and length(orderID)=6
+where product = 'iPhone' 
+and length(orderID) = 6
 and orderID<> 'Order ID';
 
 
@@ -21,8 +21,8 @@ select distinct acctnum
 from BIT_DB.customers cust
 inner join BIT_DB.FebSales feb
 on cust.order_id=feb.orderID
-where length(feb.orderID)=6
-and orderID<> 'Order ID';
+where length(feb.orderID) = 6
+and orderID <> 'Order ID';
 
 
 #4. Which product was the cheapest one sold in January, and what was the price?
@@ -40,14 +40,15 @@ group by product;
 #6. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 Select product, sum(quantity) as quantity, sum(quantity)*price as revenue
 from BIT_DB.FebSales
-where location='548 Lincoln St, Seattle, WA 98101';
+where location='548 Lincoln St, Seattle, WA 98101'
+group by product;
 
 
 #7. How many customer ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
 Select count(distinct cust.acctnum), avg(quantity*price)
 from BIT_DB.customers cust
 left join BIT_DB.FebSales feb
-on cust.order_id=feb.orderID
-where feb.quantity>2
-and length(orderID)=6
+on cust.order_id = feb.orderID
+where feb.quantity > 2
+and length(orderID) = 6
 and orderID<>'Order ID';
